@@ -1,0 +1,17 @@
+const gameEngine = new GameEngine();
+
+const ASSET_MANAGER = new AssetManager();
+
+ASSET_MANAGER.queueDownload("./doggy.png");
+
+ASSET_MANAGER.downloadAll(() => {
+	const canvas = document.getElementById("gameWorld");
+	const ctx = canvas.getContext("2d");
+
+	gameEngine.addEntity(new LittleDog(gameEngine));
+	ctx.imageSmoothingEnabled = false;
+
+	gameEngine.init(ctx);
+
+	gameEngine.start();
+});
